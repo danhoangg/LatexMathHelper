@@ -9,11 +9,7 @@ var sendLatex = () => {
             latex: document.getElementById('latex').value
         })
     }).then((res) => {
-        if (res.status === 500) {
-            alert('Internal Server Error');
-        } else {
             return res.blob();
-        }
         }).then(data => {
         const imageUrl = URL.createObjectURL(data);
         document.getElementById('latex-output').src = imageUrl;

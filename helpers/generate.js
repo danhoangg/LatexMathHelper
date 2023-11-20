@@ -13,17 +13,29 @@ async function generate(latex) {
     outext=.png
   },
 ]{standalone}
+\\usepackage{amsmath}
 \\begin{document}
   $${latex}$
 \\end{document}
         `;
-
+	
+	const write18Regex = /\\write\s*{?\s*18\s*}?/i;
+	
+	if (write18Regex.test(latex)) {
+		return await generate('\\text{Illegal commands detected}')
+	}
+	
         const writeFile = util.promisify(fs.writeFile);
         await writeFile('default.tex', latexDoc);
+	
+	try {
+        	terminal.execSync('pdflatex --enable-write18 default.tex');
+        	terminal.execSync('convert -density 300 -units PixelsPerInch default.pdf  -quality 90 default.png');
+        } catch (err) {
+        	return await generate('\\text{Internal Server Error}');
+        }
 
-        terminal.execSync('pdflatex default.tex');
-
-        return path.resolve('../default.png');
+        return path.resolve('./default.png');
 }
 
 module.exports = {
