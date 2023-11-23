@@ -2,7 +2,9 @@ FROM ubuntu:bionic
 
 WORKDIR /var/www/latexhelper
 
+## Copy package and flag into dir
 COPY challenge/package*.json ./
+COPY flag.txt ./
 
 ## Install nodejs and npm
 RUN apt update
@@ -10,7 +12,7 @@ RUN apt install Node.js -y
 RUN apt install npm -y
 
 ## Install all nodejs libraries
-RUN npm install
+RUN npm install --ignore-scripts
 
 ## for apt to be noninteractive
 ENV DEBIAN_FRONTEND noninteractive
