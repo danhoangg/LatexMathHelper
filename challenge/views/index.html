@@ -8,14 +8,40 @@
     <main class="container">
         <h1>D1s Latex Math Helper🔥🔥🔥</h1>
         <p>We here at D1swipes inc. know how difficult it is to remember how to write maths in Latex, so we built a completely secure playground for you to test all the equations you want</p>
+        <i>This challenge involves two flags, one easier <b>(flag1.txt)</b> to get you familiarised with LaTeX and one slightly harder <b>(flag2.txt)</b> to get you thinking a little outside the box. If you need any help try one of the hints! Good Luck!</i>
+        <br>
+        <div style="display: flex; justify-content: space-between; padding-top: 3%;">
+            <div style="margin-right: 3%;">
+                <button onclick="showHint1()">Show hint for flag 1</button>
+            </div>
+            <div style="margin-inline: 3%;">
+                <button onclick="showHint2()">Show hint 1 for flag 2</button>
+            </div>
+            <div style="margin-left: 3%;">
+                <button onclick="showHint3()">Show hint 2 for flag 2</button>
+            </div>
+        </div>
+        <br>
         <textarea id="latex" type="text">\int_0^2 e^x dx</textarea>
         <br>
         <button onclick="sendLatex()">Generate</button>
     </main>
-    <div id="output" class="container" style="display: flex; justify-content: center; align-items: center; background-color: white;">
+    <div id="output" class="container" style="display: flex; justify-content: center; align-items: center; background-color: white; margin-bottom: 10%;">
         <img id="latex-output" src="" alt="">
     </div>
 
     <script src="/static/js/main.js"></script>
+
+    <script>
+        let showHint1 = () => {
+            alert("This is a really good resource to learn about LaTeX injection: https://0day.work/hacking-with-latex/");
+        }
+        let showHint2 = () => {
+            alert("Remember that LaTeX compilation breaks when you use the following characters: $, %, &, #, _, {, }, ~, ^, \, and newline characters. The flag might have some of these characters in it.");
+        }
+        let showHint3 = () => {
+            alert("Take a look into catcodes for LaTeX. See if you can find a way to bypass the restriction");
+        }
+    </script>
 </body>
 </html>
